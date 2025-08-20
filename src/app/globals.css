@@ -1,0 +1,99 @@
+@import "tailwindcss";
+
+:root {
+  --background: #0D0D0D;
+  --foreground: #E0E0E0;
+  --foreground-bright: #FFFFFF;
+  --brand-orange: #FF4500;
+  --dark-border: #333333;
+}
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --color-foreground-bright: var(--foreground-bright);
+  --color-brand-orange: var(--brand-orange);
+  --color-dark-border: var(--dark-border);
+  
+  /* BDSMCP Brand Colors */
+  --color-brand: {
+    orange: var(--brand-orange);
+  };
+  
+  --color-dark: {
+    bg: var(--background);
+    text: var(--foreground);
+    border: var(--dark-border);
+  };
+
+  /* Typography */
+  --font-heading: var(--font-space-grotesk);
+  --font-body: var(--font-inter);
+  --font-sans: var(--font-inter);
+  --font-mono: 'JetBrains Mono', monospace;
+}
+
+/* Grid background pattern with subtle animation */
+.grid-background {
+  background-image: 
+    linear-gradient(to right, var(--dark-border) 1px, transparent 1px),
+    linear-gradient(to bottom, var(--dark-border) 1px, transparent 1px);
+  background-size: 40px 40px;
+  position: relative;
+}
+
+.grid-background::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: 
+    radial-gradient(circle at 20% 50%, rgba(255, 69, 0, 0.03) 0%, transparent 50%),
+    radial-gradient(circle at 80% 20%, rgba(255, 69, 0, 0.02) 0%, transparent 50%),
+    radial-gradient(circle at 40% 80%, rgba(255, 69, 0, 0.015) 0%, transparent 50%);
+  animation: gridGlow 20s ease-in-out infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gridGlow {
+  0%, 100% {
+    opacity: 0.3;
+  }
+  50% {
+    opacity: 0.6;
+  }
+}
+
+/* Subtle dot pattern overlay */
+.grid-background::after {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-image: radial-gradient(circle, var(--dark-border) 1px, transparent 1px);
+  background-size: 80px 80px;
+  opacity: 0.2;
+  animation: gridFloat 30s linear infinite;
+  pointer-events: none;
+  z-index: -1;
+}
+
+@keyframes gridFloat {
+  0% {
+    transform: translate(0, 0);
+  }
+  100% {
+    transform: translate(40px, 40px);
+  }
+}
+
+body {
+  background: var(--background);
+  color: var(--foreground);
+  font-family: var(--font-inter), Arial, Helvetica, sans-serif;
+}
